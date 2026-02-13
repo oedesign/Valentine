@@ -1,0 +1,1281 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Will You Be My Valentine? 💖</title>
+  <style>
+    :root {
+      --bg1: #ff4d8d;
+      --bg2: #7c3aed;
+      --bg3: #00d4ff;
+      --card: rgba(255, 255, 255, .12);
+      --card2: rgba(255, 255, 255, .08);
+      --text: rgba(255, 255, 255, .92);
+      --muted: rgba(255, 255, 255, .75);
+      --stroke: rgba(255, 255, 255, .18);
+      --shadow: 0 20px 60px rgba(0, 0, 0, .35);
+      --radius: 22px;
+      --glow: 0 0 18px rgba(255, 77, 141, .55), 0 0 40px rgba(124, 58, 237, .35);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      overflow-x: hidden;
+      background: #0b1020;
+    }
+
+    /* ===== Animated background ===== */
+    .bg {
+      position: fixed;
+      inset: 0;
+      z-index: -6;
+      background: radial-gradient(1200px 700px at 15% 20%, rgba(255, 77, 141, .45), transparent 60%),
+        radial-gradient(1000px 700px at 85% 20%, rgba(124, 58, 237, .45), transparent 60%),
+        radial-gradient(1100px 800px at 50% 85%, rgba(0, 212, 255, .35), transparent 60%),
+        linear-gradient(120deg, rgba(255, 77, 141, .16), rgba(124, 58, 237, .14), rgba(0, 212, 255, .10));
+      filter: saturate(120%);
+      animation: hue 14s ease-in-out infinite alternate;
+    }
+
+    @keyframes hue {
+      from {
+        filter: hue-rotate(0deg) saturate(120%);
+      }
+
+      to {
+        filter: hue-rotate(25deg) saturate(130%);
+      }
+    }
+
+    .aurora {
+      position: fixed;
+      inset: -20%;
+      z-index: -5;
+      background: conic-gradient(from 180deg at 50% 50%,
+          rgba(255, 77, 141, .18),
+          rgba(124, 58, 237, .18),
+          rgba(0, 212, 255, .14),
+          rgba(255, 77, 141, .18));
+      filter: blur(60px);
+      opacity: .9;
+      animation: swirl 18s linear infinite;
+      transform-origin: center;
+    }
+
+    @keyframes swirl {
+      0% {
+        transform: rotate(0deg) scale(1.05);
+      }
+
+      100% {
+        transform: rotate(360deg) scale(1.05);
+      }
+    }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      z-index: -4;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+      opacity: .35;
+    }
+
+    .hearts {
+      position: fixed;
+      inset: 0;
+      z-index: -4;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .heart {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      transform: rotate(45deg);
+      opacity: .0;
+      animation: floatUp linear infinite;
+      filter: drop-shadow(0 10px 12px rgba(0, 0, 0, .25));
+    }
+
+    .heart:before,
+    .heart:after {
+      content: "";
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, .8), rgba(255, 255, 255, 0) 35%),
+        linear-gradient(160deg, rgba(255, 77, 141, 1), rgba(124, 58, 237, 1));
+    }
+
+    .heart:before {
+      left: -9px;
+      top: 0;
+    }
+
+    .heart:after {
+      left: 0;
+      top: -9px;
+    }
+
+    .heart {
+      background: linear-gradient(160deg, rgba(255, 77, 141, 1), rgba(124, 58, 237, 1));
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(40px) translateX(0) rotate(45deg) scale(.7);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: .85;
+      }
+
+      60% {
+        opacity: .55;
+      }
+
+      100% {
+        transform: translateY(-110vh) translateX(var(--drift)) rotate(45deg) scale(1.25);
+        opacity: 0;
+      }
+    }
+
+    /* ===== Confetti canvas ===== */
+    #confetti {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      pointer-events: none;
+      display: none;
+    }
+
+    #confetti.show {
+      display: block;
+    }
+
+    /* ===== Modal ===== */
+    .modalOverlay {
+      position: fixed;
+      inset: 0;
+      z-index: 55;
+      display: none;
+      place-items: center;
+      padding: 18px;
+      background: rgba(0, 0, 0, .55);
+      backdrop-filter: blur(10px);
+    }
+
+    .modalOverlay.show {
+      display: grid;
+    }
+
+    .modal {
+      width: min(720px, 96vw);
+      border-radius: 22px;
+      border: 1px solid rgba(255, 255, 255, .18);
+      background:
+        radial-gradient(650px 340px at 15% 0%, rgba(255, 77, 141, .25), transparent 60%),
+        radial-gradient(650px 340px at 95% 30%, rgba(0, 212, 255, .18), transparent 60%),
+        linear-gradient(180deg, rgba(255, 255, 255, .12), rgba(255, 255, 255, .06));
+      box-shadow: 0 30px 90px rgba(0, 0, 0, .45);
+      overflow: hidden;
+    }
+
+    .modalTop {
+      padding: 18px 18px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .modalTop .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, .18);
+      border: 1px solid rgba(255, 255, 255, .14);
+      color: rgba(255, 255, 255, .82);
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .xBtn {
+      border: 1px solid rgba(255, 255, 255, .16);
+      background: rgba(0, 0, 0, .18);
+      color: rgba(255, 255, 255, .9);
+      border-radius: 14px;
+      padding: 10px 12px;
+      cursor: pointer;
+      font-weight: 900;
+    }
+
+    .modalBody {
+      padding: 12px 18px 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .modalBody h2 {
+      margin: 0;
+      font-size: clamp(22px, 3vw, 30px);
+      letter-spacing: -.4px;
+      text-shadow: 0 14px 40px rgba(0, 0, 0, .35);
+    }
+
+    .modalBody p {
+      margin: 0;
+      color: rgba(255, 255, 255, .85);
+      line-height: 1.55;
+    }
+
+    .modalActions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    .secondary {
+      background: rgba(0, 0, 0, .18);
+      border: 1px solid rgba(255, 255, 255, .16);
+      color: rgba(255, 255, 255, .9);
+      font-weight: 900;
+      border-radius: 999px;
+      padding: 13px 16px;
+      cursor: pointer;
+    }
+
+    /* ===== Layout ===== */
+    header {
+      padding: 26px 18px 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    .topnav {
+      width: min(980px, 94vw);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .10);
+      border: 1px solid rgba(255, 255, 255, .16);
+      box-shadow: 0 16px 44px rgba(0, 0, 0, .22);
+      backdrop-filter: blur(10px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: .3px;
+      white-space: nowrap;
+    }
+
+    .brand .logo {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, .9), rgba(255, 255, 255, 0) 45%),
+        linear-gradient(160deg, rgba(255, 77, 141, 1), rgba(124, 58, 237, 1));
+      box-shadow: 0 0 18px rgba(255, 77, 141, .55), 0 0 40px rgba(124, 58, 237, .35);
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+    }
+
+    .navlinks {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .navlinks a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 700;
+      font-size: 14px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid rgba(255, 255, 255, .12);
+      transition: transform .15s ease, background .15s ease;
+    }
+
+    .navlinks a:hover {
+      transform: translateY(-1px);
+      background: rgba(255, 255, 255, .10);
+    }
+
+    /* Music toggle */
+    .toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, .18);
+      border: 1px solid rgba(255, 255, 255, .16);
+      color: rgba(255, 255, 255, .9);
+      cursor: pointer;
+      font-weight: 900;
+      font-size: 13.5px;
+      transition: transform .15s ease, background .15s ease;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .toggle:hover {
+      transform: translateY(-1px);
+      background: rgba(0, 0, 0, .24);
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .35);
+      transition: background .2s ease, box-shadow .2s ease;
+    }
+
+    .toggle.on .dot {
+      background: rgba(0, 255, 170, .9);
+      box-shadow: 0 0 0 12px rgba(0, 255, 170, 0);
+      animation: pulse2 1.3s infinite;
+    }
+
+    @keyframes pulse2 {
+      0% {
+        box-shadow: 0 0 0 0 rgba(0, 255, 170, .35);
+      }
+
+      70% {
+        box-shadow: 0 0 0 12px rgba(0, 255, 170, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(0, 255, 170, 0);
+      }
+    }
+
+    main {
+      min-height: calc(100vh - 90px);
+      padding: 26px 18px 40px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .shell {
+      width: min(980px, 94vw);
+      display: grid;
+      gap: 18px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255, 255, 255, .12), rgba(255, 255, 255, .08));
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: 22px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .35);
+      backdrop-filter: blur(12px);
+      overflow: hidden;
+    }
+
+    .hero {
+      padding: 28px 22px;
+      display: grid;
+      gap: 16px;
+      position: relative;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, .18);
+      border: 1px solid rgba(255, 255, 255, .14);
+      width: fit-content;
+      color: rgba(255, 255, 255, .75);
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .pulse {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255, 77, 141, 1);
+      box-shadow: 0 0 0 0 rgba(255, 77, 141, .65);
+      animation: pulse 1.6s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(255, 77, 141, .65);
+      }
+
+      70% {
+        box-shadow: 0 0 0 14px rgba(255, 77, 141, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(255, 77, 141, 0);
+      }
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(28px, 3.6vw, 44px);
+      line-height: 1.05;
+      letter-spacing: -0.6px;
+      text-shadow: 0 14px 40px rgba(0, 0, 0, .35);
+    }
+
+    .sub {
+      margin: 0;
+      color: rgba(255, 255, 255, .75);
+      font-size: 15.5px;
+      line-height: 1.5;
+      max-width: 70ch;
+    }
+
+    .btnrow {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 8px;
+      position: relative;
+      min-height: 72px;
+      /* make space so the "No" can roam */
+      padding: 4px 0;
+    }
+
+    button {
+      appearance: none;
+      border: 1px solid rgba(255, 255, 255, .18);
+      color: rgba(255, 255, 255, .95);
+      font-weight: 950;
+      letter-spacing: .3px;
+      cursor: pointer;
+      border-radius: 999px;
+      padding: 14px 18px;
+      font-size: 15px;
+      transition: transform .12s ease, filter .12s ease, background .12s ease;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, .28);
+      user-select: none;
+    }
+
+    button:active {
+      transform: translateY(1px) scale(.99);
+    }
+
+    .yes {
+      background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, .45), rgba(255, 255, 255, 0) 50%),
+        linear-gradient(160deg, rgba(255, 77, 141, 1), rgba(124, 58, 237, 1));
+      box-shadow: var(--glow), 0 18px 40px rgba(0, 0, 0, .25);
+    }
+
+    .yes:hover {
+      filter: brightness(1.06) saturate(1.05);
+      transform: translateY(-1px);
+    }
+
+    .no {
+      background: rgba(0, 0, 0, .18);
+      position: absolute;
+      /* we will control it with physics */
+      left: 160px;
+      top: 4px;
+      will-change: left, top;
+      touch-action: none;
+    }
+
+    .no:hover {
+      background: rgba(0, 0, 0, .26);
+    }
+
+    .content {
+      padding: 0 22px 22px;
+      display: grid;
+      gap: 14px;
+    }
+
+    /* About */
+    .about {
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      background:
+        radial-gradient(400px 220px at 15% 10%, rgba(255, 77, 141, .25), transparent 55%),
+        radial-gradient(420px 240px at 95% 30%, rgba(0, 212, 255, .18), transparent 55%),
+        rgba(0, 0, 0, .18);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .10);
+      display: grid;
+      gap: 12px;
+    }
+
+    .aboutTop {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .aboutTitle {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 950;
+      letter-spacing: -.2px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      background: rgba(255, 255, 255, .06);
+      color: rgba(255, 255, 255, .85);
+      font-weight: 900;
+      font-size: 12.5px;
+    }
+
+    .miniGrid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    @media (min-width: 720px) {
+      .miniGrid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .mini {
+      padding: 12px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, .12);
+      background: rgba(255, 255, 255, .06);
+    }
+
+    .mini .k {
+      font-weight: 950;
+      margin-bottom: 4px;
+    }
+
+    .mini .v {
+      color: rgba(255, 255, 255, .78);
+      line-height: 1.4;
+      font-size: 13.5px;
+    }
+
+    /* Verses panel */
+    .panel {
+      display: none;
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      background: rgba(0, 0, 0, .18);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .10);
+    }
+
+    .panel.show {
+      display: block;
+    }
+
+    .panel h2 {
+      margin: 0 0 10px 0;
+      font-size: 20px;
+      letter-spacing: -0.2px;
+    }
+
+    .verse {
+      margin: 12px 0;
+      padding: 14px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, .12);
+      background: rgba(255, 255, 255, .06);
+    }
+
+    .verse .ref {
+      font-weight: 950;
+      letter-spacing: .2px;
+      margin-bottom: 6px;
+    }
+
+    .verse .txt {
+      color: rgba(255, 255, 255, .86);
+      line-height: 1.55;
+    }
+
+    /* Pages */
+    .page {
+      display: none;
+      padding: 22px;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    .grid2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    @media (min-width: 860px) {
+      .grid2 {
+        grid-template-columns: 1.2fr .8fr;
+      }
+    }
+
+    .biglink {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      background: rgba(255, 255, 255, .06);
+      text-decoration: none;
+      color: rgba(255, 255, 255, .92);
+      transition: transform .12s ease, background .12s ease;
+    }
+
+    .biglink:hover {
+      transform: translateY(-1px);
+      background: rgba(255, 255, 255, .09);
+    }
+
+    .biglink span {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      font-weight: 950;
+    }
+
+    .icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: rgba(0, 0, 0, .22);
+      border: 1px solid rgba(255, 255, 255, .14);
+      font-weight: 950;
+    }
+
+    .note {
+      color: rgba(255, 255, 255, .75);
+      font-size: 14px;
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    footer {
+      padding: 18px 18px 34px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .foot {
+      width: min(980px, 94vw);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      color: rgba(255, 255, 255, .65);
+      font-size: 13px;
+    }
+
+    .chip {
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      background: rgba(255, 255, 255, .06);
+      color: rgba(255, 255, 255, .78);
+      font-weight: 900;
+      letter-spacing: .2px;
+    }
+
+    .sparkles {
+      position: absolute;
+      right: -40px;
+      top: -40px;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, .7), rgba(255, 255, 255, 0) 55%),
+        radial-gradient(circle at 70% 60%, rgba(255, 77, 141, .8), rgba(255, 77, 141, 0) 55%),
+        radial-gradient(circle at 45% 80%, rgba(0, 212, 255, .6), rgba(0, 212, 255, 0) 55%);
+      filter: blur(22px);
+      opacity: .55;
+      transform: rotate(10deg);
+      pointer-events: none;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Replace MP3_URL_HERE with your real mp3 link (https://.../song.mp3) -->
+  <audio id="song" preload="none" loop>
+    <source src="MP3_URL_HERE" type="audio/mpeg" />
+  </audio>
+
+  <canvas id="confetti"></canvas>
+
+  <!-- YES MODAL -->
+  <div class="modalOverlay" id="modalOverlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modalTop">
+        <div class="tag">💘 Valentine Moment</div>
+        <button class="xBtn" id="closeModal" type="button" aria-label="Close">✕</button>
+      </div>
+      <div class="modalBody">
+        <h2 id="modalTitle">You just made my heart smile. 🥹💖</h2>
+        <p>
+          Thank you for choosing love. Not the “temporary” kind—real love: patient, kind, and rooted in truth.
+          Before we read the verses, I just want you to know… you’re appreciated, you’re valued, and you’re not alone.
+        </p>
+        <p style="color:rgba(255,255,255,.78)">
+          Ready to see love in the Word (KJV)?
+        </p>
+        <div class="modalActions">
+          <button class="yes" id="showVersesBtn" type="button">Show the verses 📖</button>
+          <button class="secondary" id="sweetBtn" type="button">A sweeter message 💌</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg"></div>
+  <div class="aurora"></div>
+  <div class="grain"></div>
+  <div class="hearts" id="hearts"></div>
+
+  <header>
+    <nav class="topnav" aria-label="primary">
+      <div class="brand">
+        <div class="logo">💖</div>
+        <div>OE Design</div>
+      </div>
+
+      <div class="navlinks">
+        <a href="#home" data-route="home">Home</a>
+        <a href="#linkedin" data-route="linkedin">LinkedIn</a>
+        <a href="#facebook" data-route="facebook">Facebook</a>
+
+        <button class="toggle" id="musicToggle" type="button" aria-pressed="false" title="Toggle music">
+          <span class="dot" aria-hidden="true"></span>
+          <span id="musicLabel">Music: Off</span>
+          <span aria-hidden="true">🎵</span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="shell">
+      <!-- HOME -->
+      <section class="card page active" id="page-home" data-page="home">
+        <div class="hero">
+          <div class="sparkles"></div>
+          <div class="pill"><span class="pulse"></span> Real & True Love</div>
+          <h1>Will you be my valentine? 💘</h1>
+          <p class="sub">
+            A small question… with a big heart. If you say yes, I’ll show you love—straight from the Word. ✨
+          </p>
+
+          <div class="btnrow" id="btnrow">
+            <button class="yes" id="yesBtn" type="button">Yes ✅</button>
+            <button class="no" id="noBtn" type="button" aria-label="No (this button runs away)">No ❌</button>
+          </div>
+        </div>
+
+        <div class="content">
+          <!-- PRETTY ABOUT -->
+          <section class="about" aria-label="About">
+            <div class="aboutTop">
+              <div class="aboutTitle">
+                <span style="font-size:22px">✨</span>
+                <span>About this love letter</span>
+              </div>
+              <div class="badge">OE Design • Crafted with ❤️</div>
+            </div>
+
+            <p class="sub" style="margin:0;">
+              This page is a gentle reminder that real love is more than words—it's patience, kindness, truth,
+              and a heart that chooses goodness even when it’s hard. If you’re reading this, you matter.
+            </p>
+
+            <div class="miniGrid">
+              <div class="mini">
+                <div class="k">True</div>
+                <div class="v">Honest, faithful, and rooted in God’s love.</div>
+              </div>
+              <div class="mini">
+                <div class="k">Tender</div>
+                <div class="v">Soft in tone, strong in commitment.</div>
+              </div>
+              <div class="mini">
+                <div class="k">Intentional</div>
+                <div class="v">Love is a choice—made daily.</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- VERSES -->
+          <div class="panel" id="versesPanel" role="region" aria-live="polite">
+            <h2>Love, in the Word (KJV) 📖</h2>
+
+            <div class="verse">
+              <div class="ref">1 John 4:7–8 (KJV)</div>
+              <div class="txt">
+                Beloved, let us love one another: for love is of God; and every one that loveth is born of God, and
+                knoweth God.
+                He that loveth not knoweth not God; for God is love.
+              </div>
+            </div>
+
+            <div class="verse">
+              <div class="ref">1 Peter 1:22 (KJV)</div>
+              <div class="txt">
+                Seeing ye have purified your souls in obeying the truth through the Spirit unto unfeigned love of the
+                brethren,
+                see that ye love one another with a pure heart fervently:
+              </div>
+            </div>
+
+            <div class="verse">
+              <div class="ref">Mark 12:30–31 (KJV)</div>
+              <div class="txt">
+                And thou shalt love the Lord thy God with all thy heart, and with all thy soul, and with all thy mind,
+                and with all thy strength:
+                this is the first commandment.
+                And the second is like, namely this, Thou shalt love thy neighbour as thyself. There is none other
+                commandment greater than these.
+              </div>
+            </div>
+
+            <div class="verse">
+              <div class="ref">Luke 6:35 (KJV)</div>
+              <div class="txt">
+                But love ye your enemies, and do good, and lend, hoping for nothing again; and your reward shall be
+                great, and ye shall be the children of the Highest:
+                for he is kind unto the unthankful and to the evil.
+              </div>
+            </div>
+
+            <div class="verse">
+              <div class="ref">John 3:16 (KJV)</div>
+              <div class="txt">
+                For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should
+                not perish, but have everlasting life.
+              </div>
+            </div>
+
+            <div class="verse">
+              <div class="ref">John 14:15 (KJV)</div>
+              <div class="txt">
+                If ye love me, keep my commandments.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- LINKEDIN -->
+      <section class="card page" id="page-linkedin" data-page="linkedin">
+        <div class="hero">
+          <div class="pill"><span class="pulse"></span> OE Design • Social</div>
+          <h1>LinkedIn</h1>
+          <p class="sub">A reference page that links to your professional profile.</p>
+        </div>
+        <div class="content">
+          <div class="grid2">
+            <a class="biglink" href="https://www.linkedin.com/in/YOUR_HANDLE_HERE" target="_blank" rel="noopener">
+              <span><span class="icon">in</span> Visit my LinkedIn</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+            <p class="note">Replace <strong>YOUR_HANDLE_HERE</strong> with your real LinkedIn handle.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- FACEBOOK -->
+      <section class="card page" id="page-facebook" data-page="facebook">
+        <div class="hero">
+          <div class="pill"><span class="pulse"></span> OE Design • Social</div>
+          <h1>Facebook</h1>
+          <p class="sub">A reference page that links to your Facebook profile or page.</p>
+        </div>
+        <div class="content">
+          <div class="grid2">
+            <a class="biglink" href="https://www.facebook.com/YOUR_PROFILE_OR_PAGE" target="_blank" rel="noopener">
+              <span><span class="icon">f</span> Visit my Facebook</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+            <p class="note">Replace <strong>YOUR_PROFILE_OR_PAGE</strong> with your real Facebook username or page URL.
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="foot">
+      <div class="chip">OE Design</div>
+      <div>Made with ❤️ for real and true love.</div>
+    </div>
+  </footer>
+
+  <script>
+    // =========================
+    // Floating hearts background
+    // =========================
+    const heartsWrap = document.getElementById("hearts");
+    const HEARTS = 18;
+    const rand = (min, max) => Math.random() * (max - min) + min;
+
+    for (let i = 0; i < HEARTS; i++) {
+      const h = document.createElement("div");
+      h.className = "heart";
+      h.style.left = rand(0, 100) + "vw";
+      h.style.bottom = rand(-20, 20) + "vh";
+      h.style.animationDuration = rand(7, 14) + "s";
+      h.style.animationDelay = rand(0, 6) + "s";
+      h.style.setProperty("--drift", rand(-80, 80) + "px");
+      const size = rand(12, 26);
+      h.style.width = size + "px";
+      h.style.height = size + "px";
+      heartsWrap.appendChild(h);
+    }
+
+    // =========================
+    // Confetti burst (canvas)
+    // =========================
+    const confettiCanvas = document.getElementById("confetti");
+    const ctx = confettiCanvas.getContext("2d");
+
+    function resizeConfetti() {
+      confettiCanvas.width = window.innerWidth * devicePixelRatio;
+      confettiCanvas.height = window.innerHeight * devicePixelRatio;
+      ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+    }
+    window.addEventListener("resize", resizeConfetti);
+    resizeConfetti();
+
+    function confettiBurst(durationMs = 1800) {
+      confettiCanvas.classList.add("show");
+
+      const colors = ["#ff4d8d", "#7c3aed", "#00d4ff", "#ffd166", "#06d6a0", "#ffffff"];
+      const pieces = Array.from({ length: 180 }, () => ({
+        x: window.innerWidth / 2 + rand(-30, 30),
+        y: window.innerHeight / 3 + rand(-10, 10),
+        vx: rand(-7, 7),
+        vy: rand(-12, -4),
+        g: rand(0.18, 0.28),
+        w: rand(6, 12),
+        h: rand(4, 10),
+        rot: rand(0, Math.PI * 2),
+        vr: rand(-0.18, 0.18),
+        color: colors[Math.floor(rand(0, colors.length))]
+      }));
+
+      const start = performance.now();
+      function draw(t) {
+        const elapsed = t - start;
+        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+        pieces.forEach(p => {
+          p.vy += p.g;
+          p.x += p.vx;
+          p.y += p.vy;
+          p.rot += p.vr;
+
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.rot);
+          ctx.fillStyle = p.color;
+          ctx.globalAlpha = Math.max(0, 1 - elapsed / durationMs);
+          ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+          ctx.restore();
+        });
+
+        if (elapsed < durationMs) {
+          requestAnimationFrame(draw);
+        } else {
+          ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+          confettiCanvas.classList.remove("show");
+        }
+      }
+      requestAnimationFrame(draw);
+    }
+
+    // =========================
+    // Router for pages
+    // =========================
+    const pages = Array.from(document.querySelectorAll("[data-page]"));
+    function setActivePage(name) {
+      pages.forEach(p => p.classList.toggle("active", p.dataset.page === name));
+      if (name !== "home") versesPanel.classList.remove("show");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+    function routeFromHash() {
+      const h = (location.hash || "#home").replace("#", "");
+      const allowed = new Set(["home", "linkedin", "facebook"]);
+      setActivePage(allowed.has(h) ? h : "home");
+    }
+    window.addEventListener("hashchange", routeFromHash);
+    routeFromHash();
+
+    // =========================
+    // Real song toggle (<audio>)
+    // =========================
+    const song = document.getElementById("song");
+    const musicToggle = document.getElementById("musicToggle");
+    const musicLabel = document.getElementById("musicLabel");
+    let musicOn = false;
+
+    function setMusic(on) {
+      musicOn = on;
+      musicToggle.classList.toggle("on", on);
+      musicToggle.setAttribute("aria-pressed", String(on));
+      musicLabel.textContent = on ? "Music: On" : "Music: Off";
+
+      if (on) {
+        // Attempt to play; if blocked, user can click again
+        song.volume = 0.6;
+        song.play().catch(() => {
+          musicLabel.textContent = "Music: Tap again";
+          musicToggle.classList.add("on");
+        });
+      } else {
+        song.pause();
+      }
+    }
+    musicToggle.addEventListener("click", () => setMusic(!musicOn));
+
+    // =========================
+    // Elements
+    // =========================
+    const btnrow = document.getElementById("btnrow");
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const versesPanel = document.getElementById("versesPanel");
+
+    // =========================
+    // Smooth magnetic avoidance for "No"
+    // Physics: position + velocity with spring & repulsion from pointer
+    // =========================
+    let dodgingEnabled = true;
+
+    // State in btnrow local coordinates
+    const state = { x: 160, y: 4, vx: 0, vy: 0 };
+    let pointer = { x: null, y: null, active: false };
+
+    function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+
+    function getLocalPointer(e) {
+      const r = btnrow.getBoundingClientRect();
+      return { x: e.clientX - r.left, y: e.clientY - r.top };
+    }
+
+    btnrow.addEventListener("pointermove", (e) => {
+      const p = getLocalPointer(e);
+      pointer.x = p.x; pointer.y = p.y; pointer.active = true;
+    });
+    btnrow.addEventListener("pointerleave", () => {
+      pointer.active = false;
+      pointer.x = pointer.y = null;
+    });
+
+    // If touch, also track
+    btnrow.addEventListener("touchmove", (e) => {
+      const t = e.touches[0];
+      if (!t) return;
+      const r = btnrow.getBoundingClientRect();
+      pointer.x = t.clientX - r.left;
+      pointer.y = t.clientY - r.top;
+      pointer.active = true;
+    }, { passive: true });
+
+    // If they try to focus/click it, it still runs
+    noBtn.addEventListener("focus", () => { noBtn.blur(); });
+    noBtn.addEventListener("click", (e) => { e.preventDefault(); });
+
+    function initNoPosition() {
+      // Keep it inside btnrow at a valid starting location
+      const r = btnrow.getBoundingClientRect();
+      const b = noBtn.getBoundingClientRect();
+      const pad = 6;
+      state.x = clamp(160, pad, r.width - b.width - pad);
+      state.y = 4;
+      noBtn.style.left = state.x + "px";
+      noBtn.style.top = state.y + "px";
+    }
+
+    function tick() {
+      const r = btnrow.getBoundingClientRect();
+      const b = noBtn.getBoundingClientRect();
+
+      const pad = 6;
+      const maxX = Math.max(pad, r.width - b.width - pad);
+      const maxY = Math.max(pad, r.height - b.height - pad);
+
+      // A "home" target (where it likes to return when not chased)
+      const homeX = clamp(160, pad, maxX);
+      const homeY = clamp(4, pad, maxY);
+
+      // Forces
+      let ax = 0, ay = 0;
+
+      // Spring to home (gentle)
+      const spring = 0.010;
+      ax += (homeX - state.x) * spring;
+      ay += (homeY - state.y) * spring;
+
+      if (dodgingEnabled && pointer.active && pointer.x != null) {
+        // Repulsion from pointer
+        const cx = state.x + b.width / 2 - (r.left - btnrow.getBoundingClientRect().left); // safe
+        const cy = state.y + b.height / 2;
+
+        const dx = cx - pointer.x;
+        const dy = cy - pointer.y;
+        const dist = Math.sqrt(dx * dx + dy * dy) || 0.0001;
+
+        // If cursor gets within "magnet radius", push away harder
+        const magnetRadius = 170;
+        if (dist < magnetRadius) {
+          const strength = (1 - dist / magnetRadius);
+          const repel = 0.55 * strength; // base repulsion
+          ax += (dx / dist) * repel;
+          ay += (dy / dist) * repel;
+        }
+
+        // Also if pointer is SUPER close, do a quick dash
+        const panicRadius = 80;
+        if (dist < panicRadius) {
+          const panic = 1.15 * (1 - dist / panicRadius);
+          ax += (dx / dist) * panic;
+          ay += (dy / dist) * panic;
+        }
+      }
+
+      // Integrate velocity
+      const damping = 0.86;     // lower = more “sticky”, higher = more floaty
+      const speedLimit = 18;    // cap velocity for smoothness
+
+      state.vx = (state.vx + ax) * damping;
+      state.vy = (state.vy + ay) * damping;
+
+      state.vx = clamp(state.vx, -speedLimit, speedLimit);
+      state.vy = clamp(state.vy, -speedLimit, speedLimit);
+
+      state.x += state.vx;
+      state.y += state.vy;
+
+      // Keep inside container; bounce a bit
+      const bounce = 0.55;
+      if (state.x < pad) { state.x = pad; state.vx *= -bounce; }
+      if (state.y < pad) { state.y = pad; state.vy *= -bounce; }
+      if (state.x > maxX) { state.x = maxX; state.vx *= -bounce; }
+      if (state.y > maxY) { state.y = maxY; state.vy *= -bounce; }
+
+      noBtn.style.left = state.x + "px";
+      noBtn.style.top = state.y + "px";
+
+      requestAnimationFrame(tick);
+    }
+
+    // =========================
+    // YES modal flow
+    // =========================
+    const modalOverlay = document.getElementById("modalOverlay");
+    const closeModal = document.getElementById("closeModal");
+    const showVersesBtn = document.getElementById("showVersesBtn");
+    const sweetBtn = document.getElementById("sweetBtn");
+
+    function openModal() {
+      modalOverlay.classList.add("show");
+      modalOverlay.setAttribute("aria-hidden", "false");
+      // Confetti for the moment
+      confettiBurst(1900);
+    }
+    function hideModal() {
+      modalOverlay.classList.remove("show");
+      modalOverlay.setAttribute("aria-hidden", "true");
+    }
+
+    yesBtn.addEventListener("click", () => {
+      dodgingEnabled = false; // once yes is clicked, stop chasing games 😄
+      noBtn.style.opacity = "0.55";
+      noBtn.style.filter = "grayscale(.15)";
+      openModal();
+    });
+
+    closeModal.addEventListener("click", hideModal);
+    modalOverlay.addEventListener("click", (e) => {
+      if (e.target === modalOverlay) hideModal();
+    });
+
+    sweetBtn.addEventListener("click", () => {
+      sweetBtn.textContent = "You are my favorite blessing ✨";
+      confettiBurst(1100);
+    });
+
+    showVersesBtn.addEventListener("click", () => {
+      hideModal();
+      versesPanel.classList.add("show");
+      versesPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    // ESC closes modal
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modalOverlay.classList.contains("show")) hideModal();
+    });
+
+    // Init
+    requestAnimationFrame(() => {
+      initNoPosition();
+      tick();
+    });
+  </script>
+</body>
+
+</html>
