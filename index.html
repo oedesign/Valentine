@@ -18,7 +18,7 @@
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="theme-color" content="#ff4d8d" />
 
-  <!-- Canonical (replace with your real hosted URL) -->
+  <!-- Canonical -->
   <link rel="canonical" href="https://oedesign.github.io/Valentine/" />
 
   <!-- ======================
@@ -30,7 +30,6 @@
   <meta property="og:description"
     content="A playful Valentine page with animated love vibes + KJV verses about love. Share it with someone special." />
   <meta property="og:url" content="https://oedesign.github.io/Valentine/" />
-  <!-- Tip: replace with a real image URL when hosted (1200x630 recommended) -->
   <meta property="og:image" content="https://oedesign.github.io/Valentine/images/val-og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -42,7 +41,7 @@
   <meta name="twitter:title" content="Will You Be My Valentine? 💖" />
   <meta name="twitter:description"
     content="A playful Valentine page with animated love vibes + KJV verses about love." />
-  <meta name="twitter:image" content="https://oedesign.github.io/Valentine/assets/og-image.png" />
+  <meta name="twitter:image" content="https://oedesign.github.io/Valentine/images/val-og-image.png" />
   <meta name="twitter:url" content="https://oedesign.github.io/Valentine/" />
 
   <!-- ======================
@@ -50,8 +49,6 @@
   ======================= -->
   <link rel="icon" type="image/svg+xml"
     href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cdefs%3E%3CradialGradient id='g' cx='30%25' cy='25%25' r='80%25'%3E%3Cstop offset='0%25' stop-color='%23ffffff' stop-opacity='.9'/%3E%3Cstop offset='45%25' stop-color='%23ff4d8d'/%3E%3Cstop offset='100%25' stop-color='%237c3aed'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect rx='14' ry='14' width='64' height='64' fill='url(%23g)'/%3E%3Cpath d='M32 50s-16-10-20-20c-2-6 1-12 7-14 5-2 10 1 13 5 3-4 8-7 13-5 6 2 9 8 7 14-4 10-20 20-20 20z' fill='%23fff' fill-opacity='.95'/%3E%3C/svg%3E" />
-  <link rel="apple-touch-icon"
-    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 64 64'%3E%3Cdefs%3E%3CradialGradient id='g' cx='30%25' cy='25%25' r='80%25'%3E%3Cstop offset='0%25' stop-color='%23ffffff' stop-opacity='.9'/%3E%3Cstop offset='45%25' stop-color='%23ff4d8d'/%3E%3Cstop offset='100%25' stop-color='%237c3aed'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect rx='14' ry='14' width='64' height='64' fill='url(%23g)'/%3E%3Cpath d='M32 50s-16-10-20-20c-2-6 1-12 7-14 5-2 10 1 13 5 3-4 8-7 13-5 6 2 9 8 7 14-4 10-20 20-20 20z' fill='%23fff' fill-opacity='.95'/%3E%3C/svg%3E" />
 
   <style>
     :root {
@@ -552,9 +549,83 @@
     }
 
     .yes {
+      position: relative;
       background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, .45), rgba(255, 255, 255, 0) 50%),
         linear-gradient(160deg, rgba(255, 77, 141, 1), rgba(124, 58, 237, 1));
       box-shadow: var(--glow), 0 18px 40px rgba(0, 0, 0, .25);
+      transform: translateZ(0);
+    }
+
+    /* ✅ “Click Yes” attention grabber BEFORE clicking */
+    .yes.attn {
+      animation: yesWobble 1.9s ease-in-out infinite;
+    }
+
+    .yes.attn::before {
+      content: "";
+      position: absolute;
+      inset: -10px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(255, 77, 141, .45), rgba(124, 58, 237, .25), transparent 68%);
+      filter: blur(2px);
+      opacity: .85;
+      z-index: -1;
+      animation: halo 1.6s ease-in-out infinite;
+    }
+
+    .yes.attn::after {
+      content: "⬇ click YES";
+      position: absolute;
+      left: 50%;
+      top: -34px;
+      transform: translateX(-50%);
+      font-size: 12.5px;
+      font-weight: 950;
+      letter-spacing: .3px;
+      color: rgba(255, 255, 255, .92);
+      text-shadow: 0 12px 30px rgba(0, 0, 0, .45);
+      opacity: .95;
+      animation: nudge 1.1s ease-in-out infinite;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    @keyframes yesWobble {
+
+      0%,
+      100% {
+        transform: translateY(0) scale(1);
+      }
+
+      50% {
+        transform: translateY(-2px) scale(1.03);
+      }
+    }
+
+    @keyframes halo {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: .65;
+      }
+
+      50% {
+        transform: scale(1.12);
+        opacity: 1;
+      }
+    }
+
+    @keyframes nudge {
+
+      0%,
+      100% {
+        transform: translateX(-50%) translateY(0);
+      }
+
+      50% {
+        transform: translateX(-50%) translateY(3px);
+      }
     }
 
     .yes:hover {
@@ -584,6 +655,7 @@
       padding: 4px 0;
     }
 
+    /* ✅ UNCLICKABLE "NO" + clickable illusion */
     .no {
       background: rgba(0, 0, 0, .18);
       position: absolute;
@@ -591,10 +663,68 @@
       top: 4px;
       will-change: left, top;
       touch-action: none;
+
+      /* 🔥 actually unclickable */
+      pointer-events: none;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
+
+      /* 👀 looks clickable */
+      filter: brightness(1);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, .28);
+      transform: translateY(0);
     }
 
-    .no:hover {
-      background: rgba(0, 0, 0, .26);
+    /* cursor illusion: show a hand cursor on the whole row */
+    .btnrow.no-hover-illusion {
+      cursor: pointer;
+    }
+
+    /* hover illusion: highlight No when user gets close */
+    .no.illusion-hover {
+      filter: brightness(1.1);
+      box-shadow: 0 0 18px rgba(255, 255, 255, .10), 0 18px 40px rgba(0, 0, 0, .30);
+      transform: translateY(-1px) scale(1.01);
+    }
+
+    /* Tooltip for "No" */
+    .noTip {
+      position: fixed;
+      z-index: 70;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, .18);
+      background: rgba(0, 0, 0, .42);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 18px 50px rgba(0, 0, 0, .45);
+      color: rgba(255, 255, 255, .92);
+      font-weight: 850;
+      font-size: 13px;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity .15s ease, transform .15s ease;
+      pointer-events: none;
+      max-width: min(320px, 80vw);
+    }
+
+    .noTip.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .noTip::after {
+      content: "";
+      position: absolute;
+      left: 18px;
+      bottom: -6px;
+      width: 10px;
+      height: 10px;
+      background: rgba(0, 0, 0, .42);
+      border-right: 1px solid rgba(255, 255, 255, .18);
+      border-bottom: 1px solid rgba(255, 255, 255, .18);
+      transform: rotate(45deg);
+      filter: blur(.0px);
     }
 
     /* Content blocks */
@@ -861,6 +991,9 @@
   <canvas id="confetti"></canvas>
   <div class="toast" id="toast">Link copied ✅</div>
 
+  <!-- Tooltip for No -->
+  <div class="noTip" id="noTip">You can't say no, don’t stress yourself 😄</div>
+
   <!-- YES MODAL -->
   <div class="modalOverlay" id="modalOverlay" aria-hidden="true">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
@@ -925,8 +1058,13 @@
           </p>
 
           <div class="btnrow" id="btnrow">
-            <button class="yes" id="yesBtn" type="button">Yes ✅</button>
-            <button class="no" id="noBtn" type="button" aria-label="No (this button runs away)">No ❌</button>
+            <!-- ✅ attention animation before click -->
+            <button class="yes attn" id="yesBtn" type="button">Yes ✅</button>
+
+            <!-- ✅ Unclickable, looks clickable, still moves -->
+            <button class="no" id="noBtn" type="button" tabindex="-1" aria-disabled="true" aria-label="No (disabled)">
+              No ❌
+            </button>
           </div>
         </div>
 
@@ -1029,11 +1167,10 @@
         </div>
         <div class="content">
           <div class="grid2">
-            <a class="biglink" href="https://www.linkedin.com/in/YOUR_HANDLE_HERE" target="_blank" rel="noopener">
+            <a class="biglink" href="www.linkedin.com/in/oluwaseyi-elujoba-369216323" target="_blank" rel="noopener">
               <span><span class="icon">in</span> Visit my LinkedIn</span>
               <span aria-hidden="true">↗</span>
             </a>
-            <!-- <p class="note">Replace <strong>YOUR_HANDLE_HERE</strong> with your real LinkedIn handle.</p> -->
           </div>
         </div>
       </section>
@@ -1047,12 +1184,10 @@
         </div>
         <div class="content">
           <div class="grid2">
-            <a class="biglink" href="https://www.facebook.com/YOUR_PROFILE_OR_PAGE" target="_blank" rel="noopener">
+            <a class="biglink" href="https://www.facebook.com/profile.php?id=100091947076576" target="_blank" rel="noopener">
               <span><span class="icon">f</span> Visit my Facebook</span>
               <span aria-hidden="true">↗</span>
             </a>
-            <!-- <p class="note">Replace <strong>YOUR_PROFILE_OR_PAGE</strong> with your real Facebook username or page URL. -->
-            </p>
           </div>
         </div>
       </section>
@@ -1066,15 +1201,14 @@
         </div>
         <div class="content">
           <div class="grid2">
-            <!-- Use wa.me link format: https://wa.me/<countrycode+number> OR your personal invite link -->
-            <a class="biglink" id="waLink" href="YOUR_WHATSAPP_LINK" target="_blank" rel="noopener">
+            <a class="biglink" id="waLink" href="https://wa.me/08051468865" target="_blank" rel="noopener">
               <span><span class="icon">💬</span> Message me on WhatsApp</span>
               <span aria-hidden="true">↗</span>
             </a>
-            <p class="note">
+            <!-- <p class="note">
               Replace <strong>YOUR_WHATSAPP_LINK</strong> with your WhatsApp link (example:
-              <code>https://wa.me/15551234567</code>).
-            </p>
+              <code>https://wa.me/08051468865</code>).
+            </p> -->
           </div>
         </div>
       </section>
@@ -1107,11 +1241,6 @@
               </a>
             </div>
           </div>
-
-          <!-- <p class="note" style="margin-top:2px">
-            Tip: update the <strong>canonical URL</strong> and <strong>og:url</strong> meta tags to your real hosted URL
-            so shares look perfect.
-          </p> -->
         </div>
       </section>
 
@@ -1254,14 +1383,15 @@
     }
     musicToggle.addEventListener("click", () => setMusic(!musicOn));
 
-    // ========= Magnetic No Button =========
+    // ========= Magnetic No Button + Tooltip + "move FAR away" on attempt =========
     const btnrow = document.getElementById("btnrow");
     const noBtn = document.getElementById("noBtn");
     const yesBtn = document.getElementById("yesBtn");
+    const noTip = document.getElementById("noTip");
 
     let dodgingEnabled = true;
     const state = { x: 160, y: 4, vx: 0, vy: 0 };
-    let pointer = { x: null, y: null, active: false };
+    let pointer = { x: null, y: null, active: false, down: false };
 
     function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
     function getLocalPointer(e) {
@@ -1269,13 +1399,61 @@
       return { x: e.clientX - r.left, y: e.clientY - r.top };
     }
 
+    function setTooltip(show, x = 0, y = 0) {
+      if (show) {
+        noTip.style.left = (x) + "px";
+        noTip.style.top = (y) + "px";
+        noTip.classList.add("show");
+      } else {
+        noTip.classList.remove("show");
+      }
+    }
+
+    // pointer movement
     btnrow.addEventListener("pointermove", (e) => {
       const p = getLocalPointer(e);
       pointer.x = p.x; pointer.y = p.y; pointer.active = true;
+
+      // clickable illusion cursor
+      btnrow.classList.add("no-hover-illusion");
     });
+
     btnrow.addEventListener("pointerleave", () => {
       pointer.active = false; pointer.x = pointer.y = null;
+      pointer.down = false;
+      btnrow.classList.remove("no-hover-illusion");
+      noBtn.classList.remove("illusion-hover");
+      setTooltip(false);
     });
+
+    // "trying to click" anywhere in the row -> if close to No, make it jump FAR away + show tooltip
+    btnrow.addEventListener("pointerdown", (e) => {
+      pointer.down = true;
+      const p = getLocalPointer(e);
+      pointer.x = p.x; pointer.y = p.y; pointer.active = true;
+
+      const b = noBtn.getBoundingClientRect();
+      const r = btnrow.getBoundingClientRect();
+      const cx = state.x + b.width / 2;
+      const cy = state.y + b.height / 2;
+
+      const dx = cx - pointer.x;
+      const dy = cy - pointer.y;
+      const dist = Math.hypot(dx, dy);
+
+      // If they press near No, teleport it far away instantly
+      if (dodgingEnabled && dist < 140) {
+        fleeHard(pointer.x, pointer.y, /*teleport*/true);
+        // tooltip near the moving button (in viewport coords)
+        const tipX = b.left + 14;
+        const tipY = b.top - 52;
+        setTooltip(true, tipX, tipY);
+      }
+    });
+
+    window.addEventListener("pointerup", () => { pointer.down = false; });
+
+    // touch tracking for tooltip/proximity on mobile
     btnrow.addEventListener("touchmove", (e) => {
       const t = e.touches[0];
       if (!t) return;
@@ -1285,9 +1463,6 @@
       pointer.active = true;
     }, { passive: true });
 
-    noBtn.addEventListener("focus", () => noBtn.blur());
-    noBtn.addEventListener("click", (e) => e.preventDefault());
-
     function initNoPosition() {
       const r = btnrow.getBoundingClientRect();
       const b = noBtn.getBoundingClientRect();
@@ -1296,6 +1471,49 @@
       state.y = 4;
       noBtn.style.left = state.x + "px";
       noBtn.style.top = state.y + "px";
+    }
+
+    function fleeHard(px, py, teleport = false) {
+      const r = btnrow.getBoundingClientRect();
+      const b = noBtn.getBoundingClientRect();
+      const pad = 6;
+
+      const maxX = Math.max(pad, r.width - b.width - pad);
+      const maxY = Math.max(pad, r.height - b.height - pad);
+
+      // pick a far corner away from the pointer
+      const corners = [
+        { x: pad, y: pad },
+        { x: maxX, y: pad },
+        { x: pad, y: maxY },
+        { x: maxX, y: maxY }
+      ];
+
+      // choose the farthest corner
+      let best = corners[0];
+      let bestD = -1;
+      for (const c of corners) {
+        const dx = (c.x + b.width / 2) - px;
+        const dy = (c.y + b.height / 2) - py;
+        const d = dx * dx + dy * dy;
+        if (d > bestD) { bestD = d; best = c; }
+      }
+
+      if (teleport) {
+        state.x = best.x;
+        state.y = best.y;
+      }
+
+      // add a huge impulse away from pointer
+      const cx = state.x + b.width / 2;
+      const cy = state.y + b.height / 2;
+      const dx = cx - px;
+      const dy = cy - py;
+      const dist = Math.hypot(dx, dy) || 0.001;
+
+      const impulse = 26; // strong shove
+      state.vx += (dx / dist) * impulse;
+      state.vy += (dy / dist) * impulse;
     }
 
     function tick() {
@@ -1316,6 +1534,9 @@
       ax += (homeX - state.x) * spring;
       ay += (homeY - state.y) * spring;
 
+      let showTip = false;
+      let tipX = 0, tipY = 0;
+
       if (dodgingEnabled && pointer.active && pointer.x != null) {
         const cx = state.x + b.width / 2;
         const cy = state.y + b.height / 2;
@@ -1324,24 +1545,47 @@
         const dy = cy - pointer.y;
         const dist = Math.sqrt(dx * dx + dy * dy) || 0.0001;
 
-        const magnetRadius = 170;
+        // Hover illusion: highlight when close
+        if (dist < 150) noBtn.classList.add("illusion-hover");
+        else noBtn.classList.remove("illusion-hover");
+
+        // Tooltip: show while they are trying to reach "No"
+        if (dist < 160) {
+          showTip = true;
+          // position tooltip near the button in viewport coordinates
+          tipX = b.left + 14;
+          tipY = b.top - 52;
+        }
+
+        // Make it move FAR away from the arrow when close / clicking
+        const magnetRadius = 220; // bigger radius
         if (dist < magnetRadius) {
           const strength = (1 - dist / magnetRadius);
-          const repel = 0.55 * strength;
+          const repel = 0.95 * strength; // stronger repulsion
           ax += (dx / dist) * repel;
           ay += (dy / dist) * repel;
         }
 
-        const panicRadius = 80;
+        const panicRadius = 110; // stronger panic
         if (dist < panicRadius) {
-          const panic = 1.15 * (1 - dist / panicRadius);
+          const panic = 1.95 * (1 - dist / panicRadius);
           ax += (dx / dist) * panic;
           ay += (dy / dist) * panic;
         }
+
+        // If they press (pointer down) and still near -> extra hard flee
+        if (pointer.down && dist < 170) {
+          fleeHard(pointer.x, pointer.y, /*teleport*/false);
+        }
+      } else {
+        noBtn.classList.remove("illusion-hover");
       }
 
-      const damping = 0.86;
-      const speedLimit = 18;
+      // Tooltip render
+      setTooltip(showTip, tipX, tipY);
+
+      const damping = 0.84;      // slightly looser so it "escapes" more
+      const speedLimit = 26;     // allow faster fleeing
 
       state.vx = (state.vx + ax) * damping;
       state.vy = (state.vy + ay) * damping;
@@ -1381,9 +1625,13 @@
     }
 
     yesBtn.addEventListener("click", () => {
+      // stop attention animation after yes
+      yesBtn.classList.remove("attn");
+
       dodgingEnabled = false;
       noBtn.style.opacity = "0.55";
       noBtn.style.filter = "grayscale(.15)";
+      setTooltip(false);
       openModal();
     });
 
@@ -1393,7 +1641,7 @@
     });
 
     sweetBtn.addEventListener("click", () => {
-      sweetBtn.textContent = "You are my favorite blessing ✨";
+      sweetBtn.textContent = "You are a child of God. God loves you! ✨";
       confettiBurst(1100);
     });
 
@@ -1416,10 +1664,9 @@
     const liShare = document.getElementById("liShare");
 
     function getShareUrl() {
-      // Prefer the canonical if set; else current URL
       const canonical = document.querySelector("link[rel='canonical']")?.href;
-      const u = (canonical && !canonical.includes("https://oedesign.github.io/Valentine/")) ? canonical : window.location.href;
-      return u;
+      if (canonical) return canonical;
+      return "https://oedesign.github.io/Valentine/";
     }
 
     function buildShareLinks() {
@@ -1437,14 +1684,8 @@
       const shareData = { title: "Will You Be My Valentine? 💖", text: "A little love page from OE Design.", url };
 
       if (navigator.share) {
-        try {
-          await navigator.share(shareData);
-          showToast("Shared 💖");
-        } catch {
-          // user cancelled; do nothing
-        }
+        try { await navigator.share(shareData); showToast("Shared 💖"); } catch { }
       } else {
-        // Fallback: copy
         try {
           await navigator.clipboard.writeText(url);
           showToast("Link copied ✅");
