@@ -2,9 +2,56 @@
 <html lang="en">
 
 <head>
+  <!-- ======================
+       Essential Meta Tags
+  ======================= -->
   <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Will You Be My Valentine? 💖</title>
+
+  <title>Will You Be My Valentine? 💖 | OE Design</title>
+  <meta name="description"
+    content="A beautiful Valentine page with an animated love-themed background, a playful No button, and KJV verses about love. Made by OE Design." />
+  <meta name="keywords" content="valentine, love, OE Design, Bible verses, KJV, romantic webpage" />
+  <meta name="author" content="OE Design" />
+  <meta name="robots" content="index, follow" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="theme-color" content="#ff4d8d" />
+
+  <!-- Canonical (replace with your real hosted URL) -->
+  <link rel="canonical" href="YOUR_PUBLIC_URL_HERE" />
+
+  <!-- ======================
+       Social Meta Tags (OG)
+  ======================= -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="OE Design" />
+  <meta property="og:title" content="Will You Be My Valentine? 💖" />
+  <meta property="og:description"
+    content="A playful Valentine page with animated love vibes + KJV verses about love. Share it with someone special." />
+  <meta property="og:url" content="YOUR_PUBLIC_URL_HERE" />
+  <!-- Tip: replace with a real image URL when hosted (1200x630 recommended) -->
+  <meta property="og:image" content="YOUR_PUBLIC_OG_IMAGE_HERE" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <!-- ======================
+       Social Meta Tags (Twitter)
+  ======================= -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Will You Be My Valentine? 💖" />
+  <meta name="twitter:description"
+    content="A playful Valentine page with animated love vibes + KJV verses about love." />
+  <meta name="twitter:image" content="YOUR_PUBLIC_OG_IMAGE_HERE" />
+
+  <!-- ======================
+       Favicon (inline, no files needed)
+  ======================= -->
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cdefs%3E%3CradialGradient id='g' cx='30%25' cy='25%25' r='80%25'%3E%3Cstop offset='0%25' stop-color='%23ffffff' stop-opacity='.9'/%3E%3Cstop offset='45%25' stop-color='%23ff4d8d'/%3E%3Cstop offset='100%25' stop-color='%237c3aed'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect rx='14' ry='14' width='64' height='64' fill='url(%23g)'/%3E%3Cpath d='M32 50s-16-10-20-20c-2-6 1-12 7-14 5-2 10 1 13 5 3-4 8-7 13-5 6 2 9 8 7 14-4 10-20 20-20 20z' fill='%23fff' fill-opacity='.95'/%3E%3C/svg%3E" />
+  <link rel="apple-touch-icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 64 64'%3E%3Cdefs%3E%3CradialGradient id='g' cx='30%25' cy='25%25' r='80%25'%3E%3Cstop offset='0%25' stop-color='%23ffffff' stop-opacity='.9'/%3E%3Cstop offset='45%25' stop-color='%23ff4d8d'/%3E%3Cstop offset='100%25' stop-color='%237c3aed'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect rx='14' ry='14' width='64' height='64' fill='url(%23g)'/%3E%3Cpath d='M32 50s-16-10-20-20c-2-6 1-12 7-14 5-2 10 1 13 5 3-4 8-7 13-5 6 2 9 8 7 14-4 10-20 20-20 20z' fill='%23fff' fill-opacity='.95'/%3E%3C/svg%3E" />
+
   <style>
     :root {
       --bg1: #ff4d8d;
@@ -42,7 +89,8 @@
       position: fixed;
       inset: 0;
       z-index: -6;
-      background: radial-gradient(1200px 700px at 15% 20%, rgba(255, 77, 141, .45), transparent 60%),
+      background:
+        radial-gradient(1200px 700px at 15% 20%, rgba(255, 77, 141, .45), transparent 60%),
         radial-gradient(1000px 700px at 85% 20%, rgba(124, 58, 237, .45), transparent 60%),
         radial-gradient(1100px 800px at 50% 85%, rgba(0, 212, 255, .35), transparent 60%),
         linear-gradient(120deg, rgba(255, 77, 141, .16), rgba(124, 58, 237, .14), rgba(0, 212, 255, .10));
@@ -95,6 +143,7 @@
       opacity: .35;
     }
 
+    /* Floating hearts */
     .hearts {
       position: fixed;
       inset: 0;
@@ -120,7 +169,8 @@
       width: 18px;
       height: 18px;
       border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, .8), rgba(255, 255, 255, 0) 35%),
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255, 255, 255, .8), rgba(255, 255, 255, 0) 35%),
         linear-gradient(160deg, rgba(255, 77, 141, 1), rgba(124, 58, 237, 1));
     }
 
@@ -158,7 +208,7 @@
       }
     }
 
-    /* ===== Confetti canvas ===== */
+    /* Confetti */
     #confetti {
       position: fixed;
       inset: 0;
@@ -171,7 +221,7 @@
       display: block;
     }
 
-    /* ===== Modal ===== */
+    /* Modal */
     .modalOverlay {
       position: fixed;
       inset: 0;
@@ -256,17 +306,7 @@
       margin-top: 6px;
     }
 
-    .secondary {
-      background: rgba(0, 0, 0, .18);
-      border: 1px solid rgba(255, 255, 255, .16);
-      color: rgba(255, 255, 255, .9);
-      font-weight: 900;
-      border-radius: 999px;
-      padding: 13px 16px;
-      cursor: pointer;
-    }
-
-    /* ===== Layout ===== */
+    /* Header/nav */
     header {
       padding: 26px 18px 0;
       display: flex;
@@ -302,7 +342,7 @@
       border-radius: 10px;
       background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, .9), rgba(255, 255, 255, 0) 45%),
         linear-gradient(160deg, rgba(255, 77, 141, 1), rgba(124, 58, 237, 1));
-      box-shadow: 0 0 18px rgba(255, 77, 141, .55), 0 0 40px rgba(124, 58, 237, .35);
+      box-shadow: var(--glow);
       display: grid;
       place-items: center;
       font-size: 18px;
@@ -333,7 +373,7 @@
       background: rgba(255, 255, 255, .10);
     }
 
-    /* Music toggle */
+    /* Pills/toggles/buttons */
     .toggle {
       display: inline-flex;
       align-items: center;
@@ -398,12 +438,21 @@
     }
 
     .card {
-      background: linear-gradient(180deg, rgba(255, 255, 255, .12), rgba(255, 255, 255, .08));
-      border: 1px solid rgba(255, 255, 255, .18);
-      border-radius: 22px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, .35);
+      background: linear-gradient(180deg, var(--card), var(--card2));
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
       backdrop-filter: blur(12px);
       overflow: hidden;
+    }
+
+    .page {
+      display: none;
+      padding: 22px;
+    }
+
+    .page.active {
+      display: block;
     }
 
     .hero {
@@ -411,6 +460,21 @@
       display: grid;
       gap: 16px;
       position: relative;
+    }
+
+    .sparkles {
+      position: absolute;
+      right: -40px;
+      top: -40px;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, .7), rgba(255, 255, 255, 0) 55%),
+        radial-gradient(circle at 70% 60%, rgba(255, 77, 141, .8), rgba(255, 77, 141, 0) 55%),
+        radial-gradient(circle at 45% 80%, rgba(0, 212, 255, .6), rgba(0, 212, 255, 0) 55%);
+      filter: blur(22px);
+      opacity: .55;
+      transform: rotate(10deg);
+      pointer-events: none;
     }
 
     .pill {
@@ -422,7 +486,7 @@
       background: rgba(0, 0, 0, .18);
       border: 1px solid rgba(255, 255, 255, .14);
       width: fit-content;
-      color: rgba(255, 255, 255, .75);
+      color: var(--muted);
       font-weight: 800;
       font-size: 13px;
     }
@@ -460,24 +524,13 @@
 
     .sub {
       margin: 0;
-      color: rgba(255, 255, 255, .75);
+      color: var(--muted);
       font-size: 15.5px;
       line-height: 1.5;
       max-width: 70ch;
     }
 
-    .btnrow {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      align-items: center;
-      margin-top: 8px;
-      position: relative;
-      min-height: 72px;
-      /* make space so the "No" can roam */
-      padding: 4px 0;
-    }
-
+    /* Buttons */
     button {
       appearance: none;
       border: 1px solid rgba(255, 255, 255, .18);
@@ -508,10 +561,31 @@
       transform: translateY(-1px);
     }
 
+    .secondary {
+      background: rgba(0, 0, 0, .18);
+      border: 1px solid rgba(255, 255, 255, .16);
+      color: rgba(255, 255, 255, .9);
+      font-weight: 900;
+      border-radius: 999px;
+      padding: 13px 16px;
+      cursor: pointer;
+    }
+
+    /* No button magnetic avoidance */
+    .btnrow {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 8px;
+      position: relative;
+      min-height: 72px;
+      padding: 4px 0;
+    }
+
     .no {
       background: rgba(0, 0, 0, .18);
       position: absolute;
-      /* we will control it with physics */
       left: 160px;
       top: 4px;
       will-change: left, top;
@@ -522,13 +596,13 @@
       background: rgba(0, 0, 0, .26);
     }
 
+    /* Content blocks */
     .content {
       padding: 0 22px 22px;
       display: grid;
       gap: 14px;
     }
 
-    /* About */
     .about {
       padding: 18px;
       border-radius: 18px;
@@ -584,7 +658,7 @@
     }
 
     .mini {
-      padding: 12px 12px;
+      padding: 12px;
       border-radius: 16px;
       border: 1px solid rgba(255, 255, 255, .12);
       background: rgba(255, 255, 255, .06);
@@ -601,7 +675,6 @@
       font-size: 13.5px;
     }
 
-    /* Verses panel */
     .panel {
       display: none;
       padding: 18px;
@@ -623,7 +696,7 @@
 
     .verse {
       margin: 12px 0;
-      padding: 14px 14px;
+      padding: 14px;
       border-radius: 16px;
       border: 1px solid rgba(255, 255, 255, .12);
       background: rgba(255, 255, 255, .06);
@@ -640,16 +713,7 @@
       line-height: 1.55;
     }
 
-    /* Pages */
-    .page {
-      display: none;
-      padding: 22px;
-    }
-
-    .page.active {
-      display: block;
-    }
-
+    /* Social/Share page cards */
     .grid2 {
       display: grid;
       grid-template-columns: 1fr;
@@ -672,7 +736,7 @@
       border: 1px solid rgba(255, 255, 255, .14);
       background: rgba(255, 255, 255, .06);
       text-decoration: none;
-      color: rgba(255, 255, 255, .92);
+      color: var(--text);
       transition: transform .12s ease, background .12s ease;
     }
 
@@ -700,10 +764,62 @@
     }
 
     .note {
-      color: rgba(255, 255, 255, .75);
+      color: var(--muted);
       font-size: 14px;
       line-height: 1.55;
       margin: 0;
+    }
+
+    .shareRow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      background: rgba(0, 0, 0, .18);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .10);
+    }
+
+    .shareRow .hint {
+      color: rgba(255, 255, 255, .78);
+      font-size: 13.5px;
+    }
+
+    .shareBtns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tiny {
+      padding: 12px 14px;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%) translateY(20px);
+      opacity: 0;
+      z-index: 80;
+      padding: 12px 14px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, .35);
+      border: 1px solid rgba(255, 255, 255, .16);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 18px 50px rgba(0, 0, 0, .35);
+      transition: opacity .2s ease, transform .2s ease;
+      pointer-events: none;
+      font-weight: 800;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
     }
 
     footer {
@@ -732,21 +848,6 @@
       font-weight: 900;
       letter-spacing: .2px;
     }
-
-    .sparkles {
-      position: absolute;
-      right: -40px;
-      top: -40px;
-      width: 220px;
-      height: 220px;
-      background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, .7), rgba(255, 255, 255, 0) 55%),
-        radial-gradient(circle at 70% 60%, rgba(255, 77, 141, .8), rgba(255, 77, 141, 0) 55%),
-        radial-gradient(circle at 45% 80%, rgba(0, 212, 255, .6), rgba(0, 212, 255, 0) 55%);
-      filter: blur(22px);
-      opacity: .55;
-      transform: rotate(10deg);
-      pointer-events: none;
-    }
   </style>
 </head>
 
@@ -757,6 +858,7 @@
   </audio>
 
   <canvas id="confetti"></canvas>
+  <div class="toast" id="toast">Link copied ✅</div>
 
   <!-- YES MODAL -->
   <div class="modalOverlay" id="modalOverlay" aria-hidden="true">
@@ -771,9 +873,7 @@
           Thank you for choosing love. Not the “temporary” kind—real love: patient, kind, and rooted in truth.
           Before we read the verses, I just want you to know… you’re appreciated, you’re valued, and you’re not alone.
         </p>
-        <p style="color:rgba(255,255,255,.78)">
-          Ready to see love in the Word (KJV)?
-        </p>
+        <p style="color:rgba(255,255,255,.78)">Ready to see love in the Word (KJV)?</p>
         <div class="modalActions">
           <button class="yes" id="showVersesBtn" type="button">Show the verses 📖</button>
           <button class="secondary" id="sweetBtn" type="button">A sweeter message 💌</button>
@@ -798,6 +898,8 @@
         <a href="#home" data-route="home">Home</a>
         <a href="#linkedin" data-route="linkedin">LinkedIn</a>
         <a href="#facebook" data-route="facebook">Facebook</a>
+        <a href="#whatsapp" data-route="whatsapp">WhatsApp</a>
+        <a href="#share" data-route="share">Share</a>
 
         <button class="toggle" id="musicToggle" type="button" aria-pressed="false" title="Toggle music">
           <span class="dot" aria-hidden="true"></span>
@@ -810,6 +912,7 @@
 
   <main>
     <div class="shell">
+
       <!-- HOME -->
       <section class="card page active" id="page-home" data-page="home">
         <div class="hero">
@@ -827,7 +930,6 @@
         </div>
 
         <div class="content">
-          <!-- PRETTY ABOUT -->
           <section class="about" aria-label="About">
             <div class="aboutTop">
               <div class="aboutTitle">
@@ -858,7 +960,6 @@
             </div>
           </section>
 
-          <!-- VERSES -->
           <div class="panel" id="versesPanel" role="region" aria-live="polite">
             <h2>Love, in the Word (KJV) 📖</h2>
 
@@ -954,6 +1055,65 @@
           </div>
         </div>
       </section>
+
+      <!-- WHATSAPP -->
+      <section class="card page" id="page-whatsapp" data-page="whatsapp">
+        <div class="hero">
+          <div class="pill"><span class="pulse"></span> OE Design • Connect</div>
+          <h1>WhatsApp</h1>
+          <p class="sub">Tap to chat with me on WhatsApp.</p>
+        </div>
+        <div class="content">
+          <div class="grid2">
+            <!-- Use wa.me link format: https://wa.me/<countrycode+number> OR your personal invite link -->
+            <a class="biglink" id="waLink" href="YOUR_WHATSAPP_LINK" target="_blank" rel="noopener">
+              <span><span class="icon">💬</span> Message me on WhatsApp</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+            <p class="note">
+              Replace <strong>YOUR_WHATSAPP_LINK</strong> with your WhatsApp link (example:
+              <code>https://wa.me/15551234567</code>).
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SHARE -->
+      <section class="card page" id="page-share" data-page="share">
+        <div class="hero">
+          <div class="pill"><span class="pulse"></span> Share the Love</div>
+          <h1>Share this page 💞</h1>
+          <p class="sub">Send it to someone special (or a friend who needs a smile).</p>
+        </div>
+
+        <div class="content">
+          <div class="shareRow">
+            <div class="hint" id="shareHint">Use the share button or copy the link.</div>
+            <div class="shareBtns">
+              <button class="yes tiny" id="shareBtn" type="button">Share 🔗</button>
+              <button class="secondary tiny" id="copyBtn" type="button">Copy link 📋</button>
+              <a class="secondary tiny" id="waShare" href="#" target="_blank" rel="noopener"
+                style="text-decoration:none; display:inline-flex; align-items:center;">
+                WhatsApp ↗
+              </a>
+              <a class="secondary tiny" id="fbShare" href="#" target="_blank" rel="noopener"
+                style="text-decoration:none; display:inline-flex; align-items:center;">
+                Facebook ↗
+              </a>
+              <a class="secondary tiny" id="liShare" href="#" target="_blank" rel="noopener"
+                style="text-decoration:none; display:inline-flex; align-items:center;">
+                LinkedIn ↗
+              </a>
+            </div>
+          </div>
+
+          <p class="note" style="margin-top:2px">
+            Tip: update the <strong>canonical URL</strong> and <strong>og:url</strong> meta tags to your real hosted URL
+            so shares look perfect.
+          </p>
+        </div>
+      </section>
+
     </div>
   </main>
 
@@ -965,9 +1125,7 @@
   </footer>
 
   <script>
-    // =========================
-    // Floating hearts background
-    // =========================
+    // ========= Hearts =========
     const heartsWrap = document.getElementById("hearts");
     const HEARTS = 18;
     const rand = (min, max) => Math.random() * (max - min) + min;
@@ -986,9 +1144,17 @@
       heartsWrap.appendChild(h);
     }
 
-    // =========================
-    // Confetti burst (canvas)
-    // =========================
+    // ========= Toast =========
+    const toast = document.getElementById("toast");
+    let toastTimer = null;
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove("show"), 1600);
+    }
+
+    // ========= Confetti =========
     const confettiCanvas = document.getElementById("confetti");
     const ctx = confettiCanvas.getContext("2d");
 
@@ -1002,7 +1168,6 @@
 
     function confettiBurst(durationMs = 1800) {
       confettiCanvas.classList.add("show");
-
       const colors = ["#ff4d8d", "#7c3aed", "#00d4ff", "#ffd166", "#06d6a0", "#ffffff"];
       const pieces = Array.from({ length: 180 }, () => ({
         x: window.innerWidth / 2 + rand(-30, 30),
@@ -1047,10 +1212,10 @@
       requestAnimationFrame(draw);
     }
 
-    // =========================
-    // Router for pages
-    // =========================
+    // ========= Router =========
     const pages = Array.from(document.querySelectorAll("[data-page]"));
+    const versesPanel = document.getElementById("versesPanel");
+
     function setActivePage(name) {
       pages.forEach(p => p.classList.toggle("active", p.dataset.page === name));
       if (name !== "home") versesPanel.classList.remove("show");
@@ -1058,15 +1223,13 @@
     }
     function routeFromHash() {
       const h = (location.hash || "#home").replace("#", "");
-      const allowed = new Set(["home", "linkedin", "facebook"]);
+      const allowed = new Set(["home", "linkedin", "facebook", "whatsapp", "share"]);
       setActivePage(allowed.has(h) ? h : "home");
     }
     window.addEventListener("hashchange", routeFromHash);
     routeFromHash();
 
-    // =========================
-    // Real song toggle (<audio>)
-    // =========================
+    // ========= Real Song Toggle (<audio>) =========
     const song = document.getElementById("song");
     const musicToggle = document.getElementById("musicToggle");
     const musicLabel = document.getElementById("musicLabel");
@@ -1079,7 +1242,6 @@
       musicLabel.textContent = on ? "Music: On" : "Music: Off";
 
       if (on) {
-        // Attempt to play; if blocked, user can click again
         song.volume = 0.6;
         song.play().catch(() => {
           musicLabel.textContent = "Music: Tap again";
@@ -1091,26 +1253,16 @@
     }
     musicToggle.addEventListener("click", () => setMusic(!musicOn));
 
-    // =========================
-    // Elements
-    // =========================
+    // ========= Magnetic No Button =========
     const btnrow = document.getElementById("btnrow");
     const noBtn = document.getElementById("noBtn");
     const yesBtn = document.getElementById("yesBtn");
-    const versesPanel = document.getElementById("versesPanel");
 
-    // =========================
-    // Smooth magnetic avoidance for "No"
-    // Physics: position + velocity with spring & repulsion from pointer
-    // =========================
     let dodgingEnabled = true;
-
-    // State in btnrow local coordinates
     const state = { x: 160, y: 4, vx: 0, vy: 0 };
     let pointer = { x: null, y: null, active: false };
 
     function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
-
     function getLocalPointer(e) {
       const r = btnrow.getBoundingClientRect();
       return { x: e.clientX - r.left, y: e.clientY - r.top };
@@ -1121,11 +1273,8 @@
       pointer.x = p.x; pointer.y = p.y; pointer.active = true;
     });
     btnrow.addEventListener("pointerleave", () => {
-      pointer.active = false;
-      pointer.x = pointer.y = null;
+      pointer.active = false; pointer.x = pointer.y = null;
     });
-
-    // If touch, also track
     btnrow.addEventListener("touchmove", (e) => {
       const t = e.touches[0];
       if (!t) return;
@@ -1135,12 +1284,10 @@
       pointer.active = true;
     }, { passive: true });
 
-    // If they try to focus/click it, it still runs
-    noBtn.addEventListener("focus", () => { noBtn.blur(); });
-    noBtn.addEventListener("click", (e) => { e.preventDefault(); });
+    noBtn.addEventListener("focus", () => noBtn.blur());
+    noBtn.addEventListener("click", (e) => e.preventDefault());
 
     function initNoPosition() {
-      // Keep it inside btnrow at a valid starting location
       const r = btnrow.getBoundingClientRect();
       const b = noBtn.getBoundingClientRect();
       const pad = 6;
@@ -1158,37 +1305,32 @@
       const maxX = Math.max(pad, r.width - b.width - pad);
       const maxY = Math.max(pad, r.height - b.height - pad);
 
-      // A "home" target (where it likes to return when not chased)
       const homeX = clamp(160, pad, maxX);
       const homeY = clamp(4, pad, maxY);
 
-      // Forces
       let ax = 0, ay = 0;
 
-      // Spring to home (gentle)
+      // Gentle spring back to home
       const spring = 0.010;
       ax += (homeX - state.x) * spring;
       ay += (homeY - state.y) * spring;
 
       if (dodgingEnabled && pointer.active && pointer.x != null) {
-        // Repulsion from pointer
-        const cx = state.x + b.width / 2 - (r.left - btnrow.getBoundingClientRect().left); // safe
+        const cx = state.x + b.width / 2;
         const cy = state.y + b.height / 2;
 
         const dx = cx - pointer.x;
         const dy = cy - pointer.y;
         const dist = Math.sqrt(dx * dx + dy * dy) || 0.0001;
 
-        // If cursor gets within "magnet radius", push away harder
         const magnetRadius = 170;
         if (dist < magnetRadius) {
           const strength = (1 - dist / magnetRadius);
-          const repel = 0.55 * strength; // base repulsion
+          const repel = 0.55 * strength;
           ax += (dx / dist) * repel;
           ay += (dy / dist) * repel;
         }
 
-        // Also if pointer is SUPER close, do a quick dash
         const panicRadius = 80;
         if (dist < panicRadius) {
           const panic = 1.15 * (1 - dist / panicRadius);
@@ -1197,9 +1339,8 @@
         }
       }
 
-      // Integrate velocity
-      const damping = 0.86;     // lower = more “sticky”, higher = more floaty
-      const speedLimit = 18;    // cap velocity for smoothness
+      const damping = 0.86;
+      const speedLimit = 18;
 
       state.vx = (state.vx + ax) * damping;
       state.vy = (state.vy + ay) * damping;
@@ -1210,7 +1351,6 @@
       state.x += state.vx;
       state.y += state.vy;
 
-      // Keep inside container; bounce a bit
       const bounce = 0.55;
       if (state.x < pad) { state.x = pad; state.vx *= -bounce; }
       if (state.y < pad) { state.y = pad; state.vy *= -bounce; }
@@ -1223,9 +1363,7 @@
       requestAnimationFrame(tick);
     }
 
-    // =========================
-    // YES modal flow
-    // =========================
+    // ========= Yes Modal Flow =========
     const modalOverlay = document.getElementById("modalOverlay");
     const closeModal = document.getElementById("closeModal");
     const showVersesBtn = document.getElementById("showVersesBtn");
@@ -1234,7 +1372,6 @@
     function openModal() {
       modalOverlay.classList.add("show");
       modalOverlay.setAttribute("aria-hidden", "false");
-      // Confetti for the moment
       confettiBurst(1900);
     }
     function hideModal() {
@@ -1243,7 +1380,7 @@
     }
 
     yesBtn.addEventListener("click", () => {
-      dodgingEnabled = false; // once yes is clicked, stop chasing games 😄
+      dodgingEnabled = false;
       noBtn.style.opacity = "0.55";
       noBtn.style.filter = "grayscale(.15)";
       openModal();
@@ -1265,12 +1402,72 @@
       versesPanel.scrollIntoView({ behavior: "smooth", block: "start" });
     });
 
-    // ESC closes modal
     window.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && modalOverlay.classList.contains("show")) hideModal();
     });
 
-    // Init
+    // ========= Share Feature =========
+    const shareBtn = document.getElementById("shareBtn");
+    const copyBtn = document.getElementById("copyBtn");
+    const shareHint = document.getElementById("shareHint");
+    const waShare = document.getElementById("waShare");
+    const fbShare = document.getElementById("fbShare");
+    const liShare = document.getElementById("liShare");
+
+    function getShareUrl() {
+      // Prefer the canonical if set; else current URL
+      const canonical = document.querySelector("link[rel='canonical']")?.href;
+      const u = (canonical && !canonical.includes("YOUR_PUBLIC_URL_HERE")) ? canonical : window.location.href;
+      return u;
+    }
+
+    function buildShareLinks() {
+      const url = encodeURIComponent(getShareUrl());
+      const text = encodeURIComponent("Will you be my valentine? 💖");
+      waShare.href = `https://wa.me/?text=${text}%20${url}`;
+      fbShare.href = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+      liShare.href = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+    }
+    buildShareLinks();
+    window.addEventListener("hashchange", buildShareLinks);
+
+    shareBtn.addEventListener("click", async () => {
+      const url = getShareUrl();
+      const shareData = { title: "Will You Be My Valentine? 💖", text: "A little love page from OE Design.", url };
+
+      if (navigator.share) {
+        try {
+          await navigator.share(shareData);
+          showToast("Shared 💖");
+        } catch {
+          // user cancelled; do nothing
+        }
+      } else {
+        // Fallback: copy
+        try {
+          await navigator.clipboard.writeText(url);
+          showToast("Link copied ✅");
+          shareHint.textContent = "Copied! Now paste it anywhere 💌";
+        } catch {
+          showToast("Copy failed ❗");
+          shareHint.textContent = "Your browser blocked copy—use the share links below ↗";
+        }
+      }
+    });
+
+    copyBtn.addEventListener("click", async () => {
+      const url = getShareUrl();
+      try {
+        await navigator.clipboard.writeText(url);
+        showToast("Link copied ✅");
+        shareHint.textContent = "Copied! Now paste it anywhere 💌";
+      } catch {
+        showToast("Copy failed ❗");
+        shareHint.textContent = "Your browser blocked copy—use the share links below ↗";
+      }
+    });
+
+    // ========= Init =========
     requestAnimationFrame(() => {
       initNoPosition();
       tick();
