@@ -19,7 +19,7 @@
   <meta name="theme-color" content="#ff4d8d" />
 
   <!-- Canonical (replace with your real hosted URL) -->
-  <link rel="canonical" href="YOUR_PUBLIC_URL_HERE" />
+  <link rel="canonical" href="https://oedesign.github.io/Valentine/" />
 
   <!-- ======================
        Social Meta Tags (OG)
@@ -29,9 +29,9 @@
   <meta property="og:title" content="Will You Be My Valentine? 💖" />
   <meta property="og:description"
     content="A playful Valentine page with animated love vibes + KJV verses about love. Share it with someone special." />
-  <meta property="og:url" content="YOUR_PUBLIC_URL_HERE" />
+  <meta property="og:url" content="https://oedesign.github.io/Valentine/" />
   <!-- Tip: replace with a real image URL when hosted (1200x630 recommended) -->
-  <meta property="og:image" content="YOUR_PUBLIC_OG_IMAGE_HERE" />
+  <meta property="og:image" content="https://oedesign.github.io/Valentine/images/val-og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
 
@@ -42,7 +42,8 @@
   <meta name="twitter:title" content="Will You Be My Valentine? 💖" />
   <meta name="twitter:description"
     content="A playful Valentine page with animated love vibes + KJV verses about love." />
-  <meta name="twitter:image" content="YOUR_PUBLIC_OG_IMAGE_HERE" />
+  <meta name="twitter:image" content="https://oedesign.github.io/Valentine/assets/og-image.png" />
+  <meta name="twitter:url" content="https://oedesign.github.io/Valentine/" />
 
   <!-- ======================
        Favicon (inline, no files needed)
@@ -1032,7 +1033,7 @@
               <span><span class="icon">in</span> Visit my LinkedIn</span>
               <span aria-hidden="true">↗</span>
             </a>
-            <p class="note">Replace <strong>YOUR_HANDLE_HERE</strong> with your real LinkedIn handle.</p>
+            <!-- <p class="note">Replace <strong>YOUR_HANDLE_HERE</strong> with your real LinkedIn handle.</p> -->
           </div>
         </div>
       </section>
@@ -1050,7 +1051,7 @@
               <span><span class="icon">f</span> Visit my Facebook</span>
               <span aria-hidden="true">↗</span>
             </a>
-            <p class="note">Replace <strong>YOUR_PROFILE_OR_PAGE</strong> with your real Facebook username or page URL.
+            <!-- <p class="note">Replace <strong>YOUR_PROFILE_OR_PAGE</strong> with your real Facebook username or page URL. -->
             </p>
           </div>
         </div>
@@ -1107,10 +1108,10 @@
             </div>
           </div>
 
-          <p class="note" style="margin-top:2px">
+          <!-- <p class="note" style="margin-top:2px">
             Tip: update the <strong>canonical URL</strong> and <strong>og:url</strong> meta tags to your real hosted URL
             so shares look perfect.
-          </p>
+          </p> -->
         </div>
       </section>
 
@@ -1417,7 +1418,7 @@
     function getShareUrl() {
       // Prefer the canonical if set; else current URL
       const canonical = document.querySelector("link[rel='canonical']")?.href;
-      const u = (canonical && !canonical.includes("YOUR_PUBLIC_URL_HERE")) ? canonical : window.location.href;
+      const u = (canonical && !canonical.includes("https://oedesign.github.io/Valentine/")) ? canonical : window.location.href;
       return u;
     }
 
